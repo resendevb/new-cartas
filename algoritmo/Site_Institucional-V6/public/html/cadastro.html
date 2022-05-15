@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartas para Julieta</title>
+
+    
+
+    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+   
+        <script src="./js/funcoes.js"></script>
+</head>
+
+<body>
+    <div class="header"></div>
+
+        <div class="container">
+            <ul class="navbar">
+                <li><a href="../index.html"> Inicial</li>
+                <li><a href="../html/login.html">Login</a></li>
+                <li class="agora">Cadastro</li>
+            </ul>
+            
+    </div>
+
+    <div class="banner">
+        <div class="container_cadastro">
+            <div class="foto_cadastro"></div>
+            <div class="box">
+                <span class="span_cadastro">Cadastre-se</span><br><br>
+                <input id="nome_input" class="input_nome" placeholder="Nome"><br>
+                <input id="email_input" class="input_email" type="email" placeholder="E-mail"><br>
+                <input id="senha_input" class="input_senha" type="password" placeholder="********"><br>
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>   
+   <!--footer inicio-->
+   <div class="footer">
+    <div class="container">
+        <h4>São Paulo- SP- SPTech &copy;2022 </h4>
+    </div>
+</div>
+<!--footer fim-->
+  
+</body>
+
+</html>
+<script>
+    function cadastrar(){
+        var nomeVar = nome_input.value
+        var emailVar = email_input.value
+        var senhaVar = senha_input.value
+    
+    if(nome.lenght == 0){
+        nomeVar.style.borderColor = 'red'
+        nomeVar.style.borderStyle = 'solid'
+        nomeVar.style.borderWidth = '5px'
+    }
+    else if(email.indexOf("@")==-1){
+        emailVar.style.borderColor = 'red'
+        emailVar.style.borderStyle = 'solid'
+        emailVar.style.borderWidth = '5px'
+    }
+    else if (senha.lenght < 8){
+        senhaVar.style.borderColor = 'red'
+        senhaVar.style.borderStyle = 'solid'
+        senhaVar.style.borderWidth = '5px'
+    }
+    else {alert("Cadastro concluído com sucesso")}
+
+
+    //[19:56, 14/05/2022] Pe: // Enviando o valor da nova input
+
+    //fetch responsável por mandar as variaveis p rota
+      fetch("/usuarios/cadastrar", {
+         
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              // crie um atributo que recebe o valor recuperado aqui
+              // Agora vá para o arquivo routes/usuario.js              
+              nomeServer : nomeVar,
+              emailServer : emailVar,
+              senhaServer : senhaVar
+                      
+          })
+      })
+      window.location.href = "login.html" 
+  }
+
+    
+  
+</script>
